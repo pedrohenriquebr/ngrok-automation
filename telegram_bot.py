@@ -27,6 +27,25 @@ dispatcher = updater.dispatcher
 logging.basicConfig(level=logging.DEBUG,
             format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
+def filter_cmd(cmd):
+    
+    if len(cmd.split(' ')) != 2:
+        return -1
+    
+    protocol = cmd.split(' ')[0]
+    port  = cmd.split(' ')[1]
+
+    if protocol not in ('tcp','http','tls'):
+        return -1
+    
+    try:
+        port  = int(port)
+    except Error:
+        return -1
+
+    return 0
+
+
 # /start
 def start(update, context):
 
@@ -51,7 +70,11 @@ def echo(update, context):
     if update.message.from_user.username != os.getenv("TELEGRAM_USERNAME"):
         context.bot.send_message(chat_id=update.message.chat_id,text="You're blocked!")
         return
-    
+
+    if filter_cmd(update.message.text.lower()) != 0:
+        context.bot.send_message(chat_id=update.message.chat_id,text="Protocol or port invalid!")
+        return
+
     context.bot.send_message(chat_id=update.message.chat_id, text="Starting {}...".format(update.message.text.lower()))
     msg  = service.start(update.message.text.lower())
     context.bot.send_message(chat_id=update.message.chat_id,text=msg)
