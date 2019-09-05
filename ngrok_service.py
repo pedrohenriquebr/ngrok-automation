@@ -16,7 +16,7 @@ class NgrokService:
 		os.system("killall ngrok")
 
 		subprocess.Popen(
-			['/usr/bin/env','bash','-c','ngrok {} -config /home/pedro/.ngrok2/ngrok.yml'.format(cmd)],
+			['/usr/bin/env','bash','-c','ngrok {} -config $HOME/.ngrok2/ngrok.yml'.format(cmd)],
 			stdout=open('ngrok.log','w'),
 			stderr=open('ngrok.err','w'))
 		
