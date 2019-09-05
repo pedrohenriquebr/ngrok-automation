@@ -27,9 +27,7 @@ $ <PID>
 If you want to send email with notification, open `telegram_bot.py`, change the line 79 and add `True`, as follow:
 
 ```python
-78    context.bot.send_message(chat_id=update.message.chat_id, text="Starting {}...".format(update.message.text.lower()))
 79    msg  = service.start(update.message.text.lower(),True)
-80    context.bot.send_message(chat_id=update.message.chat_id,text=msg)
 ```
 
 > Verify if put your email credentials in the .env
