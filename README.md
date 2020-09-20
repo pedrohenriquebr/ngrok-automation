@@ -1,6 +1,6 @@
-# Ngrok service
+# Ngrok Automation
 
-It's a hack to manage ngrok with telegram bot in python.
+It's a hack to automate ngrok with telegram bot in python.
 
 ## Prerequisites
 
